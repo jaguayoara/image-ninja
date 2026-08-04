@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero">
+  <div class="hero-stamp">
+    <span class="stamp-name">ImageNinja</span>
+    <span class="stamp-sep">/</span>
+    <span class="stamp-meta">v1.0.0</span>
+    <span class="stamp-sep">/</span>
+    <span class="stamp-meta">MIT</span>
+    <span class="stamp-sep">/</span>
+    <span class="stamp-meta">Win &middot; Mac &middot; Linux</span>
+  </div>
+  <h1>Reescala y analiza tus fotos.<br><span class="accent">Sin subir nada.</span></h1>
+  <p class="tagline">
+    ImageNinja corre Real-ESRGAN en tu computador. Reescala hasta 4K, lee EXIF, XMP,
+    GPS e ICC. No hay servidor, no hay API, no hay costo por imagen.
+  </p>
+  <div class="hero-cta">
+    <a href="{{ url_for('tool_upscale') }}" class="hero-link hero-link-primary">
+      Mejorar imagen
+      <span class="hero-link-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+    <a href="{{ url_for('tool_metadata') }}" class="hero-link hero-link-ghost">
+      Extraer metadatos
+      <span class="hero-link-arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+
+  <p class="hero-specs">
+    <span>67 MB modelo</span>
+    <span class="sep" aria-hidden="true">&middot;</span>
+    <span>0.7s / megapixel</span>
+    <span class="sep" aria-hidden="true">&middot;</span>
+    <span>hasta 4K UHD / DCI / QHD</span>
+    <span class="sep" aria-hidden="true">&middot;</span>
+    <span>0 KB enviados</span>
+  </p>
+
+  <div class="hero-preview" aria-hidden="true">
+    <div class="hero-preview-frame">
+      <div class="hero-preview-body">
+        <div class="hero-preview-line">
+          <span class="hero-preview-prompt">~</span>
+          <span class="hero-preview-cmd">ninja <span class="flag">inspect</span> <span class="arg">DSC_0123.NEF</span></span>
+        </div>
+        <div class="hero-preview-line hero-preview-out">
+          <span class="key">camera</span> <span class="val">Sony A7 IV</span>
+        </div>
+        <div class="hero-preview-line hero-preview-out">
+          <span class="key">lens</span>   <span class="val">FE 85mm f/1.8</span>
+        </div>
+        <div class="hero-preview-line hero-preview-out">
+          <span class="key">iso</span>    <span class="val">800</span>
+          <span class="key">f/</span>      <span class="val">2.0</span>
+          <span class="key">ss</span>     <span class="val">1/200s</span>
+        </div>
+        <div class="hero-preview-line hero-preview-out">
+          <span class="key">gps</span>    <span class="val">-33.05, -71.60</span>
+          <span class="key">date</span>   <span class="val">2024-08-15</span>
+        </div>
+        <div class="hero-preview-line">
+          <span class="hero-preview-prompt">~</span>
+          <span class="hero-preview-cmd">ninja <span class="flag">enhance</span> <span class="arg">DSC_0123.NEF</span> <span class="flag">--upscale</span> <span class="arg">4x</span> <span class="flag">--model</span> <span class="arg">realesrgan-x4</span></span>
+          <span class="hero-preview-cursor" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tools">
+  <header class="tools-head">
+    <h2>Herramientas</h2>
+    <p>Dos. Cada una corre 100% local.</p>
+  </header>
+  <ol class="tool-list">
+    <li>
+      <a href="{{ url_for('tool_upscale') }}" class="tool-row">
+        <span class="tool-row-num">01</span>
+        <span class="tool-row-icon" data-tone="emerald">{% include '_icon_sparkles.html' %}</span>
+        <span class="tool-row-body">
+          <span class="tool-row-title">Reescalar a 4K</span>
+          <span class="tool-row-desc">Real-ESRGAN x4 con denoise, super-resolucion, Lanczos refine y unsharp mask. Hasta 4K UHD, 4K DCI o QHD.</span>
+        </span>
+        <span class="tool-row-cta" aria-hidden="true">&rarr;</span>
+      </a>
+    </li>
+    <li>
+      <a href="{{ url_for('tool_metadata') }}" class="tool-row">
+        <span class="tool-row-num">02</span>
+        <span class="tool-row-icon" data-tone="emerald">{% include '_icon_meta.html' %}</span>
+        <span class="tool-row-body">
+          <span class="tool-row-title">Extraer metadatos</span>
+          <span class="tool-row-desc">Lee EXIF, IPTC, XMP, GPS, perfil ICC. Descarga como JSON. Util para auditoria, limpieza y revision.</span>
+        </span>
+        <span class="tool-row-cta" aria-hidden="true">&rarr;</span>
+      </a>
+    </li>
+  </ol>
+</section>
+
+<section class="manifesto">
+  <h2 class="manifesto-title">Manifiesto</h2>
+  <p class="manifesto-lead">
+    Tus fotos no son datos de entrenamiento. No son productos. No son leads.
+  </p>
+  <div class="manifesto-grid">
+    <div class="manifesto-row">
+      <span class="manifesto-no">0</span>
+      <span class="manifesto-unit">MB</span>
+      <span class="manifesto-text">de tus fotos sale de tu computador. El modelo se descarga una vez (67 MB), despues todo corre offline.</span>
+    </div>
+    <div class="manifesto-row">
+      <span class="manifesto-no">0</span>
+      <span class="manifesto-unit">clp</span>
+      <span class="manifesto-text">por imagen procesada. No hay plan free con limite, no hay upgrade, no hay "compra creditos".</span>
+    </div>
+    <div class="manifesto-row">
+      <span class="manifesto-no">0</span>
+      <span class="manifesto-unit">cuenta</span>
+      <span class="manifesto-text">requerida. No hay login, no hay email, no hay analytics. Si la app crashea, lo veo yo en mi maquina, no tu.</span>
+    </div>
+  </div>
+</section>
+
+<section class="how-it-works">
+  <header class="how-head">
+    <h2>Como funciona</h2>
+    <p>Tres pasos. Sin registro, sin nube. Los archivos temporales se borran solos a la hora.</p>
+  </header>
+  <ol class="steps">
+    <li class="step">
+      <span class="step-num">1</span>
+      <div class="step-body">
+        <h3>Elige una herramienta</h3>
+        <p><strong>Reescalar</strong> para subir la resolucion con IA, o <strong>Extraer metadatos</strong> para leer EXIF, XMP, GPS y mas.</p>
+      </div>
+    </li>
+    <li class="step">
+      <span class="step-num">2</span>
+      <div class="step-body">
+        <h3>Sube tu imagen</h3>
+        <p>Arrastra al area de drop o haz click. PNG, JPG, WebP, BMP, TIFF. max 100 MB c/u.</p>
+      </div>
+    </li>
+    <li class="step">
+      <span class="step-num">3</span>
+      <div class="step-body">
+        <h3>Procesa y descarga</h3>
+        <p>Para reescalar: elige calidad y target, click en <strong>Mejorar imagen</strong>, compara el antes/despues y descarga. Para metadatos: sube y el panel aparece solo; descarga como JSON.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+{% endblock %}

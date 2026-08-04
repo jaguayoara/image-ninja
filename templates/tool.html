@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}{{ tool.name }} — ImageNinja{% endblock %}
+{% block content %}
+<section class="tool-page">
+  <a href="{{ url_for('index') }}" class="back-link">&larr; Inicio</a>
+  <header class="tool-header">
+    <h1>{{ tool.name }}</h1>
+    <p class="tool-desc">{{ tool.description }}</p>
+  </header>
+
+  <form id="upscale-form" class="tool-form" enctype="multipart/form-data">
+    <div class="dropzone" id="dropzone">
+      <input type="file" id="file-input" name="file" accept="image/png,image/jpeg,image/webp,image/bmp,image/tiff" multiple hidden>
+      <div class="dropzone-content">
+        <div class="dropzone-icon">{% include '_icon_upload.html' %}</div>
+        <p class="dropzone-title">Arrastra imagenes aqui</p>
+        <p class="dropzone-hint">o haz click para seleccionar &middot; PNG, JPG, WebP, BMP, TIFF &middot; max 100 MB c/u</p>
+      </div>
+      <div class="dropzone-preview" id="dropzone-preview" hidden></div>
+    </div>
+
+    <div class="tool-options">
+      <div class="field field-quality">
+        <label>Calidad</label>
+        <div class="quality-pills">
+          <label class="quality-pill">
+            <input type="radio" name="quality_preset" value="best" checked>
+            <span class="pill-body">
+              <strong>Maxima</strong>
+              <small>IA + denoise + sharpen (~30-60s)</small>
+            </span>
+          </label>
+          <label class="quality-pill">
+            <input type="radio" name="quality_preset" value="realesrgan">
+            <span class="pill-body">
+              <strong>Alta</strong>
+              <small>IA Real-ESRGAN (~20-40s)</small>
+            </span>
+          </label>
+          <label class="quality-pill">
+            <input type="radio" name="quality_preset" value="lanczos">
+            <span class="pill-body">
+              <strong>Rapida</strong>
+              <small>Lanczos clasico (&lt;1s)</small>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Factor de escala</label>
+        <select name="scale" id="scale">
+          <option value="2">2x</option>
+          <option value="3">3x</option>
+          <option value="4" selected>4x</option>
+          <option value="custom">Personalizado...</option>
+        </select>
+        <input type="number" name="scale_custom" id="scale-custom" min="1.1" max="16" step="0.1" value="2" hidden>
+      </div>
+
+      <div class="field">
+        <label>Target</label>
+        <select name="target" id="target">
+          <option value="">Usar el factor de escala</option>
+          <option value="4k_uhd" selected>4K UHD (3840x2160)</option>
+          <option value="4k_dci">4K DCI (4096x2160)</option>
+          <option value="qhd">QHD (2560x1440)</option>
+          <option value="max_4k">Maximo posible dentro de 4K</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Formato de salida</label>
+        <select name="format" id="format">
+          <option value="png" selected>PNG (sin perdida)</option>
+          <option value="jpg">JPG (mas chico)</option>
+          <option value="webp">WebP (moderno)</option>
+        </select>
+      </div>
+
+      <div class="field" id="quality-field">
+        <label>Calidad JPG/WebP <span class="hint">(1-100)</span></label>
+        <input type="number" name="quality" min="1" max="100" value="95">
+      </div>
+    </div>
+
+    <div class="model-status" id="model-status">
+      <div class="model-status-row">
+        <span class="model-dot" id="model-dot"></span>
+        <span class="model-text" id="model-text">Verificando modelo IA...</span>
+        <button type="button" class="btn btn-ghost btn-sm" id="download-model-btn" hidden>Descargar modelo</button>
+      </div>
+    </div>
+
+    <div class="tool-actions">
+      <button type="submit" class="btn btn-primary btn-lg" id="submit-btn">
+        {% include '_icon_sparkles.html' %}
+        Mejorar imagen
+      </button>
+      <button type="button" class="btn btn-ghost" id="reset-btn" hidden>Reiniciar</button>
+    </div>
+
+    <div class="tool-status" id="status" hidden>
+      <div class="progress">
+        <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+      </div>
+      <p class="status-text" id="status-text">Procesando...</p>
+    </div>
+
+    <div class="tool-result" id="result" hidden>
+      <h2>Listo</h2>
+      <div class="result-list" id="result-list"></div>
+    </div>
+  </form>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/tools.js') }}"></script>
+{% endblock %}

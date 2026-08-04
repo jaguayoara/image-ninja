@@ -1,0 +1,79 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual env
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# PyInstaller
+build/
+dist/
+*.spec.bak
+.venv-build/
+build_log*.txt
+zip_check/
+
+# Local data (uploads / outputs / models)
+uploads/*
+!uploads/.gitkeep
+outputs/*
+!outputs/.gitkeep
+models/*
+!models/.gitkeep
+
+# Test / dev artifacts
+test_*.png
+test_*.jpg
+test_*.webp
+test_*.zip
+_test_*.py
+_test_*.png
+_test_*.jpg
+_test_*.webp
+_test_*.zip
+_test_*.html
+_ui_test.*
+_panel_mock*
+_meta_panel_mock*
+.old/
+.trash/
+.trash
+*.trash
+ImageNinja-windows.zip
+
+# Logs
+*.log
+imageninja.log
+papiro.log
+pdftool.log
+
+# Generated branding (se regenera con models/_make_logos.py si se actualiza el logo)
+# Estos archivos SE COMMITEAN porque son parte de la identidad del proyecto.
+# Solo se ignoran los outputs del build (_internal/, dist/, etc.)
+
+# Misc
+*.tmp
+*.bak
+.env
+
+# Impeccable (linter local, no se commitea)
+.impeccable/

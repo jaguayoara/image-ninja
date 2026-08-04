@@ -1,0 +1,1 @@
+"""ImageNinja - core package."""

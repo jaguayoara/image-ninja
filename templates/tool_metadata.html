@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ tool.name }} — ImageNinja{% endblock %}
+{% block content %}
+<section class="tool-page">
+  <a href="{{ url_for('index') }}" class="back-link">&larr; Inicio</a>
+  <header class="tool-header">
+    <h1>{{ tool.name }}</h1>
+    <p class="tool-desc">{{ tool.description }}</p>
+  </header>
+
+  <form id="metadata-form" class="tool-form" enctype="multipart/form-data">
+    <div class="dropzone" id="dropzone">
+      <input type="file" id="file-input" name="file" accept="image/png,image/jpeg,image/webp,image/bmp,image/tiff" hidden>
+      <div class="dropzone-content">
+        <div class="dropzone-icon">{% include '_icon_upload.html' %}</div>
+        <p class="dropzone-title">Arrastra una imagen aqui</p>
+        <p class="dropzone-hint">o haz click para seleccionar &middot; PNG, JPG, WebP, BMP, TIFF &middot; max 100 MB</p>
+      </div>
+      <div class="dropzone-preview" id="dropzone-preview" hidden></div>
+    </div>
+
+    <div class="tool-status" id="status" hidden>
+      <div class="progress">
+        <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+      </div>
+      <p class="status-text" id="status-text">Leyendo metadatos...</p>
+    </div>
+
+    <div class="tool-result" id="result" hidden>
+      <h2>Metadatos extraidos</h2>
+      <div class="result-list" id="result-list"></div>
+    </div>
+  </form>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/metadata.js') }}"></script>
+{% endblock %}

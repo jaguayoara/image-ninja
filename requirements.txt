@@ -1,0 +1,15 @@
+Flask==3.0.3
+Flask-Cors==4.0.1
+Pillow==10.4.0
+pywebview==5.3
+pyinstaller==6.10.0
+
+# IA para maxima calidad (Real-ESRGAN).
+# torch es pesado (~700 MB en CPU build). Si no lo instalas, ImageNinja
+# usa Lanczos automaticamente. Para instalarlo:
+#   pip install torch basicsr realesrgan numpy
+# En la app, click en "Descargar modelo" descarga el .pth (~64 MB) automaticamente.
+torch==2.4.1
+basicsr==1.4.2
+realesrgan==0.3.0
+numpy==1.26.4
