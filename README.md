@@ -158,7 +158,7 @@ ImageNinja/
 
 ## Autor
 
-Hecho con ♥ por **[Jorge Aguayo](https://github.com/jaguayoara)** (Chile).
+Por **[Jorge Aguayo](https://github.com/jaguayoara)** (Chile).
 
 ImageNinja es parte de la familia **Ninja**: herramientas pequenas, utiles, open source, que respetan tu privacidad.
 
